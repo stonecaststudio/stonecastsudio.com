@@ -67,3 +67,5 @@ vendor/
 bower_components
 
 stylesheets
+
+env/vars.php

@@ -49,6 +49,10 @@ a {
     text-decoration: none;
     color: darken($grayscale-primary,0.2);
   }
+
+  &.page-scroll {
+    cursor: pointer;
+  }
 }
 
 .light {
@@ -239,12 +243,41 @@ a {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
+
+  a {
+    color: $grayscale-dark;
+    text-decoration: underline;
+  }
 }
 
 .hire-us-form {
 
+  label.required:after {
+    content: "*";
+    color: #2C3C40;
+    position: relative;
+    top: -5px;
+    font-size: 0.8em;
+  }
+
   input[type="submit"] {
     margin-top: 3em;
+
+    &.send-success {
+      background: #4D814D;
+      border: 1px solid #0F530F;
+      color: #FFF;
+    }
+
+    &.send-error {
+      background: #C53E3E;
+      border: 1px solid #600A0A;
+      color: #FFF;
+    }
+  }
+
+  @media all and (max-width: 766px) {
+    text-align: left;
   }
 }
 
@@ -288,14 +321,6 @@ a {
     }
   }
 
-  // .zebra-1 {
-  //   background: rgba(255, 255, 255, 0.1);
-  // }
-
-  // .zebra-2 {
-  //   background: rgba(255, 255, 255, 0.2);
-  // }
-
   tr.divider {
     background: rgba(255, 255, 255, 0.25);
 
@@ -306,6 +331,121 @@ a {
     td {
       cursor: default;
       padding: 5px;
+    }
+  }
+}
+
+.pricing-selector {
+
+  h4 {
+    margin-bottom: 0.25em;
+  }
+
+  h5 {
+    margin-bottom: 0;
+  }
+
+  ul {
+    padding-left: 0;
+  }
+
+  li {
+    list-style-type: none;
+  }
+
+  .package-names {
+    margin-bottom: 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  .package-name {
+    @include box-sizing(border-box);
+    cursor: pointer;
+    display: block;
+    width: 33%;
+    float: left;
+    padding: 1em 0;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+
+    h4 {
+      margin-top: 2px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &.current {
+      @include box-shadow(0 -2px 0 #2C3C40 inset);
+      border: 2px solid $grayscale-light;
+      border-bottom: none;
+      cursor: default;
+
+      h4 {
+        margin-top: 0;
+      }
+
+      &:hover {
+        background: transparent;
+      }
+    }
+
+    &:last-child {
+      float: right;
+    }
+
+    @media all and (max-width: 420px) {
+
+      h4 {
+        font-size: 0.9em;
+      }
+    }
+  }
+
+  .feature-list {
+    border-top: 2px solid $grayscale-light;
+    margin-bottom: 0;
+    position: relative;
+    top: -2px;
+    z-index: 5;
+  }
+
+  .feature-name {
+    @include box-sizing(border-box);
+    color: transparentize($grayscale-light, 0.5);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.1em;
+    padding: 1em 2em;
+    -webkit-tap-highlight-color: transparent;
+
+    &:active {
+      background: transparent;
+    }
+
+    &.selected {
+      border-right: 2px solid $grayscale-light;
+      border-left: 2px solid $grayscale-light;
+      color: $grayscale-light;
+      cursor: pointer;
+
+      &:hover {
+        background: transparentize($grayscale-light, 0.5);
+        color: $grayscale-dark;
+      }
+
+      &.last-of-type {
+        border-bottom: 2px solid $grayscale-light;
+      }
+    }
+
+    &:first-child {
+      padding-top: 2em;
+    }
+
+    &:last-child {
+      padding-bottom: 2em;
     }
   }
 }
@@ -327,10 +467,40 @@ a {
   font-weight: normal;
 }
 
+.required-indicator {
+  position: relative;
+  top: -3px;
+  font-size: 0.9em;
+}
+
+select.form-control:focus {
+  border-color: #ccc;
+  @include box-shadow(none);
+}
+
 .form-control.text {
   box-shadow: none;
   border: none;
   border-radius: 0;
+}
+
+.form-control.error {
+  background: #E1B2B2;
+  border: 1px solid #A85252;
+  color: #800F0F;
+}
+
+label.error {
+  color: #9E3A3A;
+  margin-left: 0.5em;
+  margin-top: 0.5em;
+  font-family: sans-serif;
+  font-weight: normal;
+  font-style: italic;
+
+  &:before {
+    content: "• ";
+  }
 }
 
 textarea.text {
@@ -520,17 +690,17 @@ footer {
   }
 }
 
-::-moz-selection {
-  text-shadow: none;
-  background: #fcfcfc;
-  background: transparentize($grayscale-light, 0.8);
-}
+// ::-moz-selection {
+//   text-shadow: none;
+//   background: #fcfcfc;
+//   background: transparentize($grayscale-light, 0.8);
+// }
 
-::selection {
-  text-shadow: none;
-  background: #fcfcfc;
-  background: transparentize($grayscale-light, 0.8);
-}
+// ::selection {
+//   text-shadow: none;
+//   background: #fcfcfc;
+//   background: transparentize($grayscale-light, 0.8);
+// }
 
 img::selection {
   background: transparent;
@@ -540,6 +710,6 @@ img::-moz-selection {
   background: transparent;
 }
 
-body {
-  webkit-tap-highlight-color: transparentize($grayscale-light, 0.8);
-}
+// body {
+//   webkit-tap-highlight-color: transparentize($grayscale-light, 0.8);
+// }

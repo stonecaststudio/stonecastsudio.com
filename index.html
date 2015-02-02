@@ -34,6 +34,9 @@
   <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
+  <!-- reCAPTCHA -->
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+
   <!-- Custom CSS -->
   <link href="stylesheets/main.css" rel="stylesheet">
 
@@ -55,7 +58,7 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
           <i class="fa fa-bars"></i>
         </button>
-        <a class="navbar-brand page-scroll" href="#page-top">Stonecast Studio</a>
+        <a class="navbar-brand page-scroll" data-scroll-to="#page-top">Stonecast Studio</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -63,13 +66,13 @@
         <ul class="nav navbar-nav">
           <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
           <li class="hidden">
-            <a href="#page-top"></a>
+            <a id="page-top"></a>
           </li>
           <li>
-          <a class="page-scroll" href="#services"><span class="lighter">Services</span></a>
+          <a class="page-scroll" data-scroll-to="#services"><span class="lighter">Services</span></a>
           </li>
           <li>
-            <a class="page-scroll" href="#hire">&bull;&nbsp;Hire Us&nbsp;&bull;</a>
+            <a class="page-scroll" data-scroll-to="#hire">&bull;&nbsp;Hire Us&nbsp;&bull;</a>
           </li>
         </ul>
       </div>
@@ -87,7 +90,7 @@
             <h1 class="brand-heading">Customized, top-tier support for DataDreamers customers</h1>
             <p style="width: 30%; height: 0; border-bottom: 1px solid white; margin-left: auto; margin-right: auto;"></p>
             <p class="intro-text">From introductory-level orientation to the Wisdom RDS platform, to fully custom websites, we provide you with what your business needs to succeed.</p>
-            <a href="#about" class="btn btn-circle page-scroll">
+            <a data-scroll-to="#services" class="btn btn-circle page-scroll">
               <i class="fa fa-angle-down"></i>
             </a>
           </div>
@@ -105,7 +108,7 @@
         <p><em>Select any item for more information.</em></p>
       </div>
       <div class="col-lg-7 col-lg-offset-1">
-        <table class="table pricing-table">
+        <table class="table pricing-table hidden-xs">
           <thead>
             <th></th>
             <th>
@@ -208,11 +211,98 @@
             </tr>
           </tbody>
         </table>
-        <!-- 
-        <div class="packages" style="color: #444; width: 100%; height: 350px; background: #ccc; text-align: center; padding-top: 150px; font-size: 50px;">
-          (packages + pricing table)
-        </div>
-        -->
+
+        <div class="pricing-selector visible-xs">
+          <ul class="package-names clearfix">
+            <li class="package-name text-center current" data-price-group="pebble">
+              <h4>pebble</h4>
+              <h5>$499</h5>
+            </li class="package-name text-center">
+            <li class="package-name text-center" data-price-group="boulder">
+              <h4>boulder</h4>
+              <h5>$1,599</h5>
+            </li class="package-name text-center">
+            <li class="package-name text-center" data-price-group="summit">
+              <h4>summit</h4>
+              <h5>$4,499</h5>
+            </li class="package-name text-center">
+          </ul>
+          <ul class="feature-list">
+            <li data-toggle="modal"
+                data-target="#intro-to-wisdom"
+                data-price-group="pebble boulder summit"
+                class="feature-name selected">
+                  Intro to Wisdom
+            </li>
+            <li data-toggle="modal"
+                data-target="#logo-integration"
+                data-price-group="pebble boulder summit"
+                class="feature-name selected">
+                  Logo Integration
+            </li>
+            <li data-toggle="modal"
+                data-target="#custom-colors"
+                data-price-group="pebble boulder summit"
+                class="feature-name selected">
+                  Custom Color Scheme
+            </li>
+            <li data-toggle="modal"
+                data-target="#follow-up"
+                data-price-group="pebble boulder summit"
+                class="feature-name selected last-of-type">
+                  Follow-Up Q&A Session
+            </li>
+            <li data-toggle="modal"
+                data-target="#custom-layout"
+                data-price-group="boulder summit"
+                class="feature-name">
+                  Custom Home Page Layout
+            </li>
+            <li data-toggle="modal"
+                data-target="#custom-header"
+                data-price-group="boulder summit"
+                class="feature-name">
+                  Custom Header
+            </li>
+            <li data-toggle="modal"
+                data-target="#slideshow"
+                data-price-group="boulder summit"
+                class="feature-name">
+                  Photo Slideshow
+            </li>
+            <li data-toggle="modal"
+                data-target="#unlimited-support"
+                data-price-group="summit"
+                class="feature-name">
+                  Unlimited Support for 30-days
+            </li>
+            <li data-toggle="modal"
+                data-target="#custom-design"
+                data-price-group="summit"
+                class="feature-name">
+                  Fully Custom Home Page Design
+            </li>
+            <li data-toggle="modal"
+                data-target="#restaurant-logos"
+                data-price-group="summit"
+                class="feature-name">
+                  Restaurant Logo Uploads
+            </li>
+            <li data-toggle="modal"
+                data-target="#photoshop-template"
+                data-price-group="summit"
+                class="feature-name">
+                  Logo Upload Photoshop Template
+            </li>
+            <li data-toggle="modal"
+                data-target="#consultation"
+                data-price-group="summit"
+                class="feature-name">
+                  Business Improvement Consultation
+            </li>
+          </ul>
+        </div><!-- .pricing-selector -->
+
       </div>
     </div>
   </section>
@@ -225,55 +315,63 @@
           <div class="col-lg-4">
             <h2>Hire Us</h2>
             <p>If you'd like to work with us, please fill out this brief form, and we will contact you within 24 to 48 hours.</p>
+            <p>Please send all general inquiries to: <a href="mailto:info@stonecaststudio.com" target="_blank">info@stonecaststudio.com</a></p>
           </div>
           <div class="col-lg-7 col-lg-offset-1">
-            <form class="hire-us-form form form-horizontal">
+            <form class="hire-us-form form form-horizontal" action="mailer.php" method="post">
               <h3 class="form-section-header">About Your Business</h3>
               <div class="form-group">
-                <label for="customer-name" class="control-label col-lg-4">Your Name</label>
+                <label for="customer-name" class="control-label col-lg-4">Your Name<span class="required-indicator">*</span></label>
                 <div class="col-lg-8">
-                  <input type="text" class="form-control text" name="customer-name">
+                  <input type="text" class="form-control text" name="customer-name" required>
                 </div>
               </div>
               <div class="form-group">
-                <label for="company-name" class="control-label col-lg-4">Company Name</label>
+                <label for="company-name" class="control-label col-lg-4">Company Name<span class="required-indicator">*</span></label>
                 <div class="col-lg-8">
-                  <input type="text" class="form-control text" name="company-name">
+                  <input type="text" class="form-control text" name="company-name" required>
                 </div>
               </div>
               <div class="form-group">
-                <label for="email" class="control-label col-lg-4">Email</label>
+                <label for="email" class="control-label col-lg-4">Email<span class="required-indicator">*</span></label>
                 <div class="col-lg-8">
-                  <input type="text" class="form-control text" name="email">
+                  <input type="text" class="form-control text" name="customer-email" required>
                 </div>
               </div>
               <div class="form-group">
                 <label for="phone" class="control-label col-lg-4">Phone</label>
                 <div class="col-lg-8">
-                  <input type="number" class="form-control text" name="phone">
+                  <input type="number" class="form-control text" name="customer-phone" number>
                 </div>
               </div>
               <div class="form-group">
-                <label for="website" class="control-label col-lg-4">Your DataDreamers Website</label>
+                <label for="website" class="control-label col-lg-4">Your DataDreamers Website<span class="required-indicator">*</span></label>
                 <div class="col-lg-8">
-                  <input type="text" class="form-control text" name="website">
+                  <input type="text" class="form-control text" name="customer-website" required>
                 </div>
               </div>
               <h3 class="form-section-header">Your Project</h3>
               <div class="form-group">
-                <label for="project-description" class="control-label col-lg-4">What Kind of Work Would You Like To Have Done?</label>
+                <label for="project-description" class="control-label col-lg-4">What Kind of Work Would You Like To Have Done?<span class="required-indicator">*</span></label>
                 <div class="col-lg-8">
-                  <textarea class="form-control text"></textarea>
+                  <textarea class="form-control text" name="project-description" required></textarea>
                 </div>
               </div>
               <div class="form-group">
-                <label for="project-package" class="control-label col-lg-4">Which One Of Our Packages Are You Interested In?</label>
+                <label for="project-package" class="control-label col-lg-4">Which One Of Our Packages Are You Interested In?<span class="required-indicator">*</span></label>
                 <div class="col-lg-8">
-                  <select class="form-control">
+                  <select class="form-control" name="project-package" required>
+                    <option value="">-- select an option --</option>
                     <option value="Pebble ($499)">Pebble ($499)</option>
                     <option value="Boulder ($1,499)">Boulder ($1,499)</option>
                     <option value="Summit ($4,499)">Summit ($4,499)</option>
                   </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-lg-4">Are You a Human?<span class="required-indicator">*</span></label>
+                <div class="col-lg-8">
+                  <div class="g-recaptcha" data-sitekey="6LcuVwETAAAAAJsX_iPqxtx6-6Y3EflLrZYmrVTe"></div>
                 </div>
               </div>
               <div class="form-group">
@@ -306,6 +404,9 @@
 
   <!-- Plugin JavaScript -->
   <script src="bower_components/jquery.easing/js/jquery.easing.min.js"></script>
+  <script src="bower_components/fastclick/lib/fastclick.js"></script>
+  <script src="bower_components/jquery-form/jquery.form.js"></script>
+  <script src="bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
 
   <!-- Custom Theme JavaScript -->
   <script src="js/grayscale.js"></script>
