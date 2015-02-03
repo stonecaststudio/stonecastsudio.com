@@ -99,6 +99,18 @@ $(document).ready(function() {
 
     $('.hire-us-form').validate({
         rules: {
+            "customer-email": {
+                required: true,
+                email: true
+            },
+            "customer-phone": {
+                required: false,
+                number: false
+            },
+            "customer-website": {
+                required: true,
+                url: false
+            }
         },
         messages: {
             "customer-name": {
@@ -108,7 +120,8 @@ $(document).ready(function() {
                 required: "Please enter the name of your company"
             },
             "customer-email": {
-                required: "Please enter your email address"
+                required: "Please enter your email address",
+                email: "You must enter a valid email"
             },
             "customer-website": {
                 required: "Please enter your website address"
@@ -120,6 +133,7 @@ $(document).ready(function() {
                 required: "Please select your preferred package"
             }
         },
+        onkeyup: false,
         submitHandler: function(form) {
             var $form = $(form);
             var $submit = $form.find('input[type="submit"]');
@@ -134,7 +148,16 @@ $(document).ready(function() {
                     ;
                 },
                 success: function(data, status, xhr) {
-                    $submit.attr('value', 'email sent!').addClass('send-success');
+                    $submit.attr('value', 'Thanks! We\'ll get back to you soon!').addClass('send-success');
+                    $form.find('.text').val('');
+                    $form.find('textarea').text('').val('');
+                    $form.find('select option').each(function() {
+                        var $this = $(this);
+                        $this.removeAttr('selected');
+                        if ($this.attr('value') === '') {
+                            $this.attr('selected', 'selected');
+                        }
+                    })
                 },
                 error: function(xhr, status, error) {
                     $submit.attr('value', 'uh-oh, looks like we have a problem...').addClass('send-error');
